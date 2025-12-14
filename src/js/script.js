@@ -1,16 +1,9 @@
 import { loadJSON } from './api.js'
-import { FORM } from './constants.js'
-import { createProduct } from './api.js'
+import { handleCloseModal, handleOpenModal, handleSubmit } from './handlers.js'
 
 // подгрузка данных при загрузке страницы
 document.addEventListener('DOMContentLoaded', loadJSON)
 
-const FORM_HANDLER = () => {
-  FORM.addEventListener('submit', (event) => {
-    event.preventDefault()
-    createProduct(event.target)
-    loadJSON()
-  })
-}
-
-FORM_HANDLER()
+handleSubmit()
+handleOpenModal()
+handleCloseModal()
