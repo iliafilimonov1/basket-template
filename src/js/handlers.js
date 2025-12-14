@@ -1,5 +1,6 @@
 import { FORM, MODAL, BASKET_BTN, CLOSE_MODAL, BASKET_LIST, BASKET_LIST_CONTAINER } from './constants'
 import { createProduct, loadJSON } from './api'
+import { Notification } from './components/notification'
 
 /**
  * Генерация шаблона товара
@@ -28,7 +29,7 @@ export const generateProductTemplate = (product, vertical = true) => {
   const addToCartBtn = vertical ? '<button class="btn btn-primary add-to-cart">Add to cart</button>' : ''
   const removeBtn = !vertical
     ? `
-      <button class="close-button item-remove" aria-label="Удалить товар">
+      <button class="close-button product-remove" aria-label="Удалить товар">
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; fill: none; height: 16px; width: 16px; stroke: currentcolor; stroke-width: 3; overflow: visible;">
           <path d="m6 6 20 20"></path>
           <path d="m26 6-20 20"></path>
@@ -92,6 +93,7 @@ export const renderBasketItems = () => {
     html += generateProductTemplate(product, false)
   })
   BASKET_LIST_CONTAINER.innerHTML = html
+  handleDeleteProduct()
 }
 
 // Обработчик добавления товара в корзину
@@ -106,9 +108,30 @@ export const handleAddToBasket = (data) => {
       const findedProduct = data?.find(({ id }) => id === productId)
       // добавляем найденный элемент в массив корзины
       BASKET_LIST.push(findedProduct)
+      // показываем уведомление
+      new Notification({ title: 'Добавление товара', subtitle: 'Товар успешно добавлен в корзину' })
       // обновляем отрисовку корзины, если модалка открыта
       if (MODAL.open) {
         renderBasketItems()
+      }
+    })
+  })
+}
+
+// Обработчик удаления товара из корзины
+const handleDeleteProduct = () => {
+  const deleteBtns = document.querySelectorAll('.product-remove')
+  deleteBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const productId = btn?.parentElement?.id
+      // находим индекс элемента в массиве по ID
+      const productIndex = BASKET_LIST.findIndex(({ id }) => id === productId)
+      // удаляем найденный элемент из массива корзины
+      if (productIndex !== -1) {
+        BASKET_LIST.splice(productIndex, 1)
+        renderBasketItems()
+        // показываем уведомление
+        new Notification({ title: 'Удаление товара', subtitle: 'Товар удален из корзины' })
       }
     })
   })
