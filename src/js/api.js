@@ -1,22 +1,9 @@
-import { PRODUCTS_LIST } from './constants.js'
-import { handleAddToBasket } from './handlers.js'
-import { generateProductTemplate } from './template.js'
-
 // Функция подгрузки данных из JSON
 export async function loadJSON() {
   try {
     const response = await fetch('http://localhost:3000/products')
     const data = await response.json()
-
-    let html = ''
-
-    if (data && Array.isArray(data)) {
-      data.forEach((product) => {
-        html += generateProductTemplate(product, true)
-      })
-    }
-    PRODUCTS_LIST.insertAdjacentHTML('beforeend', html)
-    handleAddToBasket(data)
+    return data
   } catch (error) {
     console.error('Ошибка загрузки данных:', error)
   }
@@ -31,8 +18,8 @@ export async function loadJSON() {
  * @param {string} product.price - цена товара
  * @param {string} product.imgSrc - ссылка на изображение товара
  */
-export function createProduct(product) {
-  const userData = {
+export async function createProduct(product) {
+  const data = {
     name: product?.name?.value,
     category: product?.category?.value,
     rating: product?.rating?.value,
@@ -40,14 +27,16 @@ export function createProduct(product) {
     imgSrc: product?.imgSrc?.value,
   }
 
-  fetch('http://localhost:3000/products', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(userData),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error('Ошибка создания товара:', error))
+  try {
+    const response = await fetch('http://localhost:3000/products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    return await response.json()
+  } catch (error) {
+    console.error('Ошибка создания товара:', error)
+  }
 }
