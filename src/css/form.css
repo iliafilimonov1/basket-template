@@ -86,6 +86,51 @@ form input:hover {
   border-color: var(--accent-color-light);
 }
 
+form select {
+  grid-column: span 2;
+  padding: 0.625rem 1rem;
+  padding-right: 2.5rem;
+  border: 2px solid var(--input-border-color) !important;
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-family: 'Messina Sans', sans-serif;
+  background-color: var(--input-bg-color);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  transition: var(--transition);
+  width: 100%;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  color: var(--title-color);
+  outline: none;
+}
+
+form select:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+form select:hover {
+  border-color: var(--accent-color-light);
+}
+
+form select option {
+  padding: 0.5rem;
+  background-color: var(--card-bg);
+  color: var(--title-color);
+}
+
+form select option:checked {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
 form button {
   grid-column: span 2;
   background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-hover) 100%);

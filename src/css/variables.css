@@ -33,7 +33,7 @@ input[type='text'],
 input[type='email'],
 input[type='password'],
 input[type='url'],
-textarea {
+textarea, select {
   --input-bg-color: #fff;
   --input-border-color: #e9d5ff;
   --input-border-focus: #8b5cf6;
