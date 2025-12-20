@@ -1,5 +1,6 @@
 import { PRODUCTS_LIST } from './constants.js'
-import { handleAddToBasket, generateProductTemplate } from './handlers.js'
+import { handleAddToBasket } from './handlers.js'
+import { generateProductTemplate } from './template.js'
 
 // Функция подгрузки данных из JSON
 export async function loadJSON() {
