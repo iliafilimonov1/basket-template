@@ -2,30 +2,19 @@
   min-width: 900px;
   max-width: 90vw;
   border: 0;
-  position: absolute;
+  position: fixed;
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   min-height: 500px;
   padding: 0;
   box-sizing: border-box;
-  border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, var(--card-bg) 0%, #faf5ff 100%);
-  box-shadow: var(--shadow-purple);
-  animation-duration: 300ms;
-  animation-iteration-count: 1;
-  animation-fill-mode: both;
-  animation-name: slide;
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-lg);
   overflow: hidden;
-  border: 2px solid var(--border-color);
-}
-
-.modal::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent-color), var(--accent-color-light), var(--accent-color));
+  border: 1px solid var(--border-color);
+  margin: 0;
 }
 
 @media (max-width: 1024px) {
@@ -47,26 +36,16 @@
   }
 
   .product-card[data-orientation="horizontal"] .product-image {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
   }
 }
 
-@keyframes slide {
-  0% {
-    opacity: 0;
-    transform: scale(0.95) translateY(20px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
 
 .modal::backdrop {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.75) !important;
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .modal-header .close-button {
@@ -75,7 +54,7 @@
   border: 0;
   cursor: pointer;
   position: absolute;
-  left: 16px;
+  right: 16px;
 }
 
 .modal .close-button::before {
@@ -101,21 +80,26 @@
 
 .modal-header {
   position: relative;
-  min-height: 72px;
-  border-bottom: 2px solid var(--border-color);
-  padding: 0 32px;
+  min-height: 64px;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 24px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(167, 139, 250, 0.02) 100%);
+  background: var(--card-bg);
 }
 
 .modal-header__title {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--title-color);
+  margin: 0;
+  padding-right: 40px;
+  flex: 1;
 }
 
 .modal-body {
-  padding: 32px;
+  padding: 24px;
   max-height: 70vh;
   overflow-y: auto;
 }
@@ -139,10 +123,10 @@
 }
 
 .modal-body__total {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 24px;
-  line-height: 32px;
+  margin-bottom: 16px;
+  line-height: 24px;
   color: var(--title-color);
   display: inline-flex;
   align-items: center;
@@ -150,12 +134,9 @@
 }
 
 .basket__total-value {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-color), var(--accent-color-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-color);
   margin-left: 8px;
 }
 
@@ -183,7 +164,7 @@
 }
 
 .modal-footer {
-  padding: 24px 24px 38px;
+  padding: 20px 24px;
 }
 
 .modal-footer__flex {
@@ -212,3 +193,4 @@
   color: var(--text-color);
   max-width: 384px;
 }
+

@@ -1,14 +1,16 @@
 import { FORM, MODAL, BASKET_BTN, CLOSE_MODAL, BASKET_LIST } from './constants'
 import { createProduct, loadJSON } from './api'
-import { renderBasketItems } from './template'
+import { renderBasketItems, generateProductTemplate } from './template'
 import { Notification } from './components/notification'
 
 // Обработчик создания товара
 export const handleSubmit = () => {
-  FORM.addEventListener('submit', (event) => {
+  FORM.addEventListener('submit', async (event) => {
     event.preventDefault()
-    createProduct(event.target)
-    loadJSON()
+    await createProduct(event.target)
+    // Перезагружаем данные и перерисовываем карточки
+    const data = await loadJSON()
+    generateProductTemplate(data)
     FORM.reset()
   })
 }
@@ -16,7 +18,7 @@ export const handleSubmit = () => {
 // Обработчик открытия модалки
 export const handleOpenModal = () => {
   BASKET_BTN.addEventListener('click', () => {
-    MODAL.show()
+    MODAL.showModal()
     renderBasketItems()
   })
 }
@@ -35,9 +37,13 @@ export const handleAddToBasket = (data) => {
 
   addBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const productId = btn?.parentElement?.parentElement?.id
+      // Получаем ID товара из родительского элемента (product-card)
+      const productCard = btn.closest('.product-card')
+      const productId = productCard?.id
+
       // идем в бд искать найденный элемент
       const findedProduct = data?.find(({ id }) => id === productId)
+
       // добавляем найденный элемент в массив корзины
       BASKET_LIST.push(findedProduct)
       // показываем уведомление

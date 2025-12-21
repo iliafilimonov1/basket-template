@@ -13,7 +13,11 @@
       <div class="container">
         <div class="flex">
           <a class="header-logo" href="index.html">
-            <img src="" alt="logo" />
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="6" fill="#2563eb"/>
+              <path d="M16 8L20 14H24L18 22L20 28L16 24L12 28L14 22L8 14H12L16 8Z" fill="white"/>
+            </svg>
+            <span class="logo-text">Shop</span>
           </a>
 
           <nav class="header-nav">
@@ -78,6 +82,7 @@
 
             <dialog class="modal" id="modal-basket">
               <header class="modal-header">
+                <h2 class="modal-header__title">Корзина товаров</h2>
                 <button id="close-button" class="button close-button">
                   <svg
                     viewBox="0 0 32 32"
@@ -122,33 +127,7 @@
         <div class="container">
           <h2 class="title">Products</h2>
 
-          <!-- Компонент степпер  -->
-          <div class="counter">
-            <label class="counter__field">
-              <input class="counter__input" type="text" value="1" maxlength="3" readonly />
-              <span class="counter__text">шт</span>
-            </label>
-            <div class="counter__btns">
-              <button class="counter__btn counter__btn--up" aria-label="Увеличить количество">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5">
-                  <g>
-                    <g>
-                      <path d="M3.904-.035L-.003 3.151 1.02 5.03l2.988-2.387 2.988 2.387 1.022-1.88-3.89-3.186z"></path>
-                    </g>
-                  </g>
-                </svg>
-              </button>
-              <button disabled class="counter__btn counter__btn--down" aria-label="Уменьшить количество">
-                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5">
-                  <g>
-                    <g>
-                      <path d="M3.904 5.003L-.003 1.818 1.02-.062l2.988 2.386L6.995-.063l1.022 1.88-3.89 3.186z"></path>
-                    </g>
-                  </g>
-                </svg>
-              </button>
-            </div>
-          </div>
+
 
           <!-- Форма создания товара  -->
           <div class="form-container">
@@ -188,6 +167,6 @@
     </main>
 
     <script type="module" src="src/js/script.js"></script>
-    <script src="src/js/counter.js"></script>
+    <script src="src/js/components/counter.js"></script>
   </body>
 </html>
